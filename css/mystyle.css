@@ -1,0 +1,71 @@
+﻿/* login fail message display
+----------------------------------------------------------------------------- */
+label.error { 
+	float: none; 
+	color: red; 
+	padding-left:.5em ; 
+	vertical-align: top; 
+	font-weight:bold
+}
+@media screen and (orientatiolabel.errorn: portrait){
+    label.error { position:relative; left:10px; top:10px; display:inline;margin-left: 0;z-index:2 }
+}
+
+@media screen and (orientation: landscape){
+    label.error { position:relative; left:15px; top:-5px; display:inline; margin-left: 22%;z-index:2 }
+}
+
+em { color: red; font-weight: bold; padding-right: .25em; }
+
+p.center{
+margin-left: auto; 
+margin-right: auto;
+align: center;
+}
+
+#center{
+margin-left: auto; 
+margin-right: auto;
+}
+div{
+text-align:center;
+}
+#welcomeMessage{
+font-size: 25px;
+color:#FF0000;
+text-shadow: 0.05em 0.05em 0.05em black;
+font-weight:bold;
+margin-left: auto; 
+margin-right: auto;
+}
+
+#result{
+font-size: 19px;
+color:#FF0000;
+text-shadow: 0.05em 0.05em 0.05em black;
+font-weight:bold;
+margin-left: auto; 
+margin-right: auto;
+}
+#countdown{
+margin-left: auto; 
+margin-right: auto;
+}
+#1{
+width:15%;
+}
+#2{
+width:70%;
+}
+#3{
+width:15%;
+}
+#23{
+vertical-align:top;
+}
+#233{
+vertical-align:top;
+}
+#234{
+vertical-align:top;
+}

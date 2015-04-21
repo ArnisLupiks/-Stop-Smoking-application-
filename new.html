@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html> 
+<head> 
+	<title>My Page</title> 
+		<meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1"/> 
+<!-- jquery mobile **************************************************** -->
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />
+		<script src="http://code.jquery.com/jquery-1.9.1.min.js" type="text/javascript"></script>
+		<script src="http://code.jquery.com/jquery-migrate-1.1.0.min.js"></script>
+		<script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
+<!-- app theme css  **************************************************** -->
+		<link rel="stylesheet" href="css/testtheme.css" />
+<!-- clock counting up **************************************************** -->
+		<link rel="stylesheet" href="assets/countdown/jquery.countdown.css" />
+		<script src="assets/countdown/jquery.countdown.js" type="text/javascript"></script>
+		<script src="assets/js/script.js" type="text/javascript"></script>
+<!-- other styles   **************************************************** -->
+		<link rel="stylesheet" href="css/mystyle.css" />
+		<script src="js/jquery.validate.js" type="text/javascript"></script>
+		<script src="js/myjava.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="css/custom.css"/>
+<!--<!-- Picture resizeble **************************************************** -->
+		<script type="text/javascript">
+			$(function(){
+				$('figure.responsive').picture();
+				});
+		</script>
+		<script type="text/javascript" src="js/modernizr.js"></script>
+		<link rel="stylesheet" href="css/style.css"/>
+		<script type="text/javascript" src="js/jquery-picture-min.js"></script>
+<!-- Panic button ** photoswipe **************************************************** -->
+		<link rel="stylesheet" href="css/stylespicture.css"/>
+		<link rel="stylesheet" href="css/jquery-mobile-picture.css"/>
+		<link rel="stylesheet" href="css/photoswipe.css"/>
+		<script type="text/javascript" src="lib/klass.min.js"></script>
+		<script type="text/javascript" src="js/code.photoswipe-3.0.5.min.js"></script>
+			<script type="text/javascript">
+			(function(window, PhotoSwipe){
+				document.addEventListener('DOMContentLoaded', function(){
+				var
+					options = {},
+					instance = PhotoSwipe.attach( window.document.querySelectorAll('#Gallery a'), options );
+				}, false);
+			}(window, window.Code.PhotoSwipe));
+		</script>
+<!-- local storage for chat ************************************************************************* -->
+		<script type="text/javascript">
+			var localStorage = "demoStorage";
+			$('#storageDemoPage').live('pageinit', function() {
+            if (Modernizr.localstorage) {
+                showStoreValue();
+            }
+            else {
+                $('#message').text("Unfortunately your browser doesn't support local storage");
+                $('#addToStorage').attr('disabled', 'disabled');
+                $('#message').show();
+            }
+            $('#addToStorage').click(function(e) {
+                localStorage.setItem(localStorage, $('#entry').val());
+                showStoreValue();
+                e.preventDefault();
+            });
+        });
+
+        function showStoreValue() {
+            var item = localStorage.getItem(localStorage);
+            if (item == null) {
+                item = 'Nothing in store';
+            }
+            else if (item.length === 0) {
+                item = 'Store contains empty value';
+            }
+            $('.storeItem').text(item);
+        }
+		</script>
+<!-- local storage for click function ********************************** -->
+		<script>
+								function clickCounter()
+								{
+								if(typeof(Storage)!=="undefined")
+								{
+								if (localStorage.clickcount)
+								{
+								localStorage.clickcount=Number(localStorage.clickcount)+1;
+								}
+							else
+							{
+							localStorage.clickcount=1;
+							}
+							document.getElementById("result").innerHTML="You have smoked " + localStorage.clickcount + " cigarette(s). You need to focus!";	}					
+							else
+							{
+							document.getElementById("result").innerHTML="Sorry, your browser does not support web storage...";
+							}
+							}
+		</script>
+<!-- local storage for storing name ************************************************************************* -->
+		<script type="text/javascript">
+			window.onload = function() {
+			  // Check for LocalStorage support.
+				if (localStorage) {
+			  // LocalStorage is supported!
+				} else {
+			  // No support. Use a fallback such as browser cookies or store on the server.
+				}
+			  // Retrieve the users name.
+				  var username = localStorage.getItem('username');
+
+				  if (username != "undefined" || username != " ") {
+					document.getElementById('welcomeMessage').innerHTML = "Hello " + username + " ! ";
+					} else{
+					document.getElementById('welcomeMessage').innerHTML = "Hello Stranger!";
+				  }
+				// Add an event listener for form submissions
+					document.getElementById('frmLogin').addEventListener('submit', function() {
+			  // Get the value of the name field.
+					  var username = document.getElementById('username').value;
+			  // Save the name in localStorage.
+					  localStorage.setItem('username', username);
+					  return false;
+					});
+				}	
+		</script>
+</head> 
+<body> 
+<!-- **********************************************************************************************************
+		                 Sign In page
+     ********************************************************************************************************** -->
+<!-- ********************************************************************************************************** -->
+<div data-role="page" id="SignIn">
+	<div data-role="header" data-position="fixed" class="ui-bar ui-bar-b">
+		<h1>Say No to Cigarettes</h1>
+	</div><!-- /header -->
+   	<div data-role="content" >
+			<div>
+				<figure class="responsive" data-media="images/nosmoking.gif" title="Do not Smoke">
+				</figure>
+			</div>
+		<form id="frmLogin" class="validate">
+			<div id="loginForm">
+				<input type="text" data-clear-btn="true" id="username" name="username"  value="" class="required" placeholder="Username">
+				<input type="text" data-clear-btn="true" id="email" name="email"  value="" class="required" placeholder="E-mail">
+			</div>
+			
+			<div class="ui-grid-a">
+				<div class="ui-block-a" id="loginButtonDiv"><button name="login" type="submit">Enter</button></div>
+				<div class="ui-block-b"><a id="button" href="#about" data-transition="turn" data-role="button" data-rel="popup">About</a></div>
+	        </div>
+       	</form>
+				<div data-role="popup" id="about" class="ui-content" data-theme="d">
+					<p>I'm the software that will help you to quit smoking as i have great features that will help you.</p>
+				</div>
+	</div><!-- /content -->
+	<div data-role="footer" data-id="foo1" data-position="fixed">
+		<h4>Page Footer</h4>
+	</div><!-- /footer -->
+</div><!-- /page -->
+<!-- **********************************************************************************************************
+		                 User page
+     ********************************************************************************************************** -->
+<!-- ********************************************************************************************************** -->
+<div data-role="page" id="user">
+	<div data-role="header" data-position="fixed" class="ui-bar ui-bar-b">
+		<h1>Welcome</h1>
+	</div><!-- /header -->
+	<div data-role="content">
+				<div id = "welcomeMessage"></div><br />
+			<h3>Time since last cigarette &#58;</h3> 
+				<div id="countdown"></div>
+				<div id = "result"></div>
+				<br/><p>
+					<a href="#myStatistics" data-role="button"   data-theme="a">My Statistics</a>
+					<a href="#tutorials" data-role="button"   data-theme="a">Tutorials</a>
+					<a href="#settings" data-role="button"  data-theme="a">Settings</a>
+					<a href="#" data-role="button"  data-theme="a" onclick="resetQuitTimer(),clickCounter()">Time since last smoke</a>
+				</p>
+	<!-- Goes just above the footer header in the page you want it to appear ************************************ -->
+	</div><!-- /content -->
+	<div data-role="footer" data-id="foo1" data-position="fixed">
+	<div data-role="navbar">
+		<ul>
+			<li><a href="#storageDemoPage">Chat</a></li>
+			<li><a href="#panic">PanicButton</a></li>
+			<li><a href="#contactus">Contact Us</a></li>
+		</ul>
+	</div><!-- /navbar -->
+</div><!-- /footer -->
+</div><!-- /page -->
+<!-- **********************************************************************************************************
+		                 Profile Settings page
+     ********************************************************************************************************** -->
+<!-- ********************************************************************************************************** -->
+<div data-role="page" id="ProfileSettings">
+	<div data-role="header"  data-position="fixed" class="ui-bar ui-bar-b">
+	<a href="#settings" data-icon="back" data-mini ="true">Back</a>
+		<h1>Welcome</h1>
+	</div><!-- /header -->
+	<div data-role="content">
+		<div>
+			<input type="text" placeholder="username">
+			<form>
+			<label>Age</label>
+				<select name="select-age" id="select-age">
+					<option value="1">16</option>
+					<option value="2">17</option>
+					<option value="1">18</option>
+					<option value="2">19</option>
+					<option value="1">20</option>
+					<option value="2">21</option>
+					<option value="1">22</option>
+					<option value="2">23</option>
+					<option value="1">24</option>
+					<option value="2">25</option>
+					<option value="1">26</option>
+					<option value="2">27</option>
+					<option value="1">28</option>
+					<option value="2">29</option>
+					<option value="1">30</option>
+					<option value="2">31</option>
+					<option value="1">32</option>
+					<option value="2">33</option>
+					<option value="2">34</option>
+					<option value="2">35</option>
+					<option value="2">36</option>
+					<option value="2">37</option>
+					<option value="2">38</option>
+				</select>
+			</form>
+			<form>
+				<label>Gender</label>
+					<select name="select-gender" id="select-gender">
+						<option value="1">Male</option>
+						<option value="2">Female</option>
+					</select>
+					 <label>Why did you start smoking?:</label>
+					 <input type="text" name="text-1"  value="">
+					 <label>How long you are smoking?:</label>
+					 <input type="text" name="text-1"  value="">
+					 <label>How many cigarettes you smoke per day?:</label>
+					 <input type="text" name="text-1"  value="">
+					 <label>How Much you spend in the day per pack of cigarettes?:</label>
+					 <input type="text" name="text-1"  value="">
+					 <a href="#" data-role="button"   data-theme="b">Update Profile</a>
+			</form>
+		</div>
+	</div><!-- /content -->
+	<div data-role="footer" data-id="foo1" data-position="fixed">
+		<h4>Page Footer</h4>
+	</div><!-- /footer -->
+</div><!-- /page -->
+<!-- **********************************************************************************************************
+		                 Device Settings page
+     ********************************************************************************************************** -->
+<!-- ********************************************************************************************************** -->
+<div data-role="page" id ="DeviceSettings">
+	<div data-role="header" data-position="fixed" class="ui-bar ui-bar-b">
+		<a href="#settings" data-icon="back" data-mini ="true">Back</a>
+		<h1>Settings page</h1>
+	</div><!-- /header -->
+   	<div data-role="content" >
+		<div id = "setting">
+			<div>
+				<label for="slider-2">Adjust Brightness:</label>
+				<input type="range" name="slider-2" id="slider-2" data-highlight="true" min="0" max="100" value="50" />
+			</div>
+			<form>
+					<div class="ui-grid-a">
+						<div class="ui-block-a">
+							<label for="slider-12">Adjust volume:</label>
+							<input type="range" name="slider-12" id="slider-12" data-highlight="true" min="0" max="100" value="50" />
+						</div><!-- /ui-block -->
+						<div class="ui-block-b">
+							<label for="flip-10">Sound:</label>
+							<select name="flip-10" id="flip-10" data-role="slider">
+								<option value="off">Off</option>
+								<option value="on">On</option>
+							</select>
+						</div><!-- /ui-block -->
+					</div><!-- /ui-grid -->
+					<p id="center">
+							<a href="#" data-role="button" data-inline="true">Save</a>
+							<a href="#" data-role="button" data-inline="true">Reset</a>
+					</p>
+			</form>
+		</div>
+	</div><!-- /content -->
+	<div data-role="footer" data-id="foo1" data-position="fixed">
+		<h4>Page Footer</h4>
+	</div><!-- /footer -->
+</div><!-- /page -->
+<!-- **********************************************************************************************************
+		                 Panic Button page
+     ********************************************************************************************************** -->
+<!-- ********************************************************************************************************** -->
+<div data-role="page" id="panic">
+	<div data-role="header" data-position="fixed" class="ui-bar ui-bar-b">
+	<a href="#user" data-icon="back" data-mini ="true">Back</a>
+		<h1>Say No to Cigarettes</h1>
+	</div><!-- /header -->
+	<div data-role="page-content" >
+		<ul id="Gallery" class="gallery">
+			<li><a href="images/full/001.jpg" rel="external"><img src="images/thumb/001.jpg" alt="Smoking kills" /></a></li>
+			<li><a href="images/full/002.jpg" rel="external"><img src="images/thumb/002.jpg" alt="Smoking causes long cancer" /></a></li>
+			<li><a href="images/full/003.jpg" rel="external"><img src="images/thumb/003.jpg" alt="Smoking kills" /></a></li>
+			<li><a href="images/full/004.jpg" rel="external"><img src="images/thumb/004.jpg" alt="Smoking causes cancer" /></a></li>
+			<li><a href="images/full/005.jpg" rel="external"><img src="images/thumb/005.jpg" alt="Smoking causes cancer" /></a></li>
+			<li><a href="images/full/006.jpg" rel="external"><img src="images/thumb/006.jpg" alt="Smoking causes cancer" /></a></li>
+			<li><a href="images/full/007.jpg" rel="external"><img src="images/thumb/007.jpg" alt="Smoking causes cancer" /></a></li>
+			<li><a href="images/full/008.jpg" rel="external"><img src="images/thumb/008.jpg" alt="SMoking causes death" /></a></li>
+			<li><a href="images/full/009.jpg" rel="external"><img src="images/thumb/009.jpg" alt="Smoking causes cancer" /></a></li>
+		</ul>
+	</div><!-- /content -->
+	<div data-role="footer" data-id="foo1" data-position="fixed">
+		<h1> Copyright &copy; Light &amp; Co </h1>
+	</div><!-- /footer -->
+</div><!-- /page -->
+<!-- **********************************************************************************************************
+		                 Settings page
+     ********************************************************************************************************** -->
+<!-- ********************************************************************************************************** -->
+<div data-role="page" id ="settings">
+	<div data-role="header" data-position="fixed" class="ui-bar ui-bar-b">
+		<a href="#user" data-icon="back" data-mini ="true">Back</a>
+		<h1>Settings page</h1>
+	</div><!-- /header -->
+   	<div data-role="content" >
+			<form>
+				<a href="#ProfileSettings" data-role="button"   data-theme="a">Profile Settings</a>
+				<a href="#DeviceSettings" data-role="button"   data-theme="a">Device Settings</a>
+			</form>
+	</div><!-- /content -->
+	<div data-role="footer" data-id="foo1" data-position="fixed">
+		<h4>Page Footer</h4>
+	</div><!-- /footer -->
+</div><!-- /page -->
+<!-- **********************************************************************************************************
+		                 My Statistics page
+     ********************************************************************************************************** -->
+<!-- ********************************************************************************************************** -->
+	<div data-role="page" id ="myStatistics">	
+		<div data-role="header" data-position="fixed" class="ui-bar ui-bar-b">
+			<a href="#user" data-icon="back" data-mini ="true">Back</a>
+			<h1>Statistics</h1>
+		</div><!-- /header -->
+		<div data-role="content" >
+		<div id='chart_div'></div>
+		<script type='text/javascript' src='https://www.google.com/jsapi'></script>
+		<script type='text/javascript'>
+		  google.load('visualization', '1', {packages:['gauge']});
+		  google.setOnLoadCallback(drawChart);
+		  function drawChart() {
+			var data = google.visualization.arrayToDataTable([
+			  ['Label', 'Value'],
+			  ['Lung Health ', 90],
+			  ['Nicotine Levels', 65],
+			  ['Cravings', 8]
+			]);
+			var options = {
+			  width: 500, height: 140,
+			  redFrom: 90, redTo: 100,
+			  yellowFrom:75, yellowTo: 90,
+			  minorTicks: 5
+			};
+				var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+			chart.draw(data, options);
+		  }
+		</script>
+		<div id='chart_div2'></div>
+		<div id="table">
+		<table>
+		<caption>Progress Report</caption>
+		<thead>
+		<tr>
+			<td></td>
+			<th scope="col">Amount Smoked</th>
+			<th scope="col">Craving Levels</th>
+			<th scope="col">Stress Levels</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th scope="row">Monday</th>
+			<td >190</td>
+			<td >160</td>
+			<td >40</td>
+		</tr>
+		<tr>
+			<th scope="row">Tuesday</th>
+			<td>3</td>
+			<td>40</td>
+			<td>30</td>
+		</tr>
+		<tr>
+			<th scope="row">Wednesday</th>
+			<td>10</td>
+			<td>180</td>
+			<td>10</td>
+		</tr>
+		<tr>
+			<th scope="row">Thursday</th>
+			<td>40</td>
+			<td>80</td>
+			<td>90</td>
+		</tr>
+			<tr>
+			<th scope="row">Friday</th>
+			<td>40</td>
+			<td>80</td>
+			<td>90</td>
+		</tr>
+		<tr>
+			<th scope="row">Saturday</th>
+			<td>40</td>
+			<td>80</td>
+			<td>90</td>
+		</tr>
+		<tr>
+			<th scope="row">Sunday</th>
+			<td>40</td>
+			<td>80</td>
+			<td>90</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+	<p>
+	<form>
+			<div id="frmLogin2">
+					<ul data-role="listview" data-inset="true">
+						<li data-role="fieldcontain">
+							<label>Amount smoked?</label>
+							<label for="monday"></label>
+							<input type="text" name="monday" id="monday" value="" data-clear-btn="true" placeholder="Monday">
+							<label for="tuesday"></label>
+							<input type="text" name="tuesday" id="tuesday" value="" data-clear-btn="true" placeholder="Tuesday">
+							<label for="wednesday"></label>
+							<input type="text" name="wednesday" id="wednesday" value="" data-clear-btn="true" placeholder="Wednesday">
+							<label for="thursday"></label>
+							<input type="text" name="thursday" id="thursday" value="" data-clear-btn="true" placeholder="Thursday">
+							<label for="friday"></label>
+							<input type="text" name="friday" id="friday" value="" data-clear-btn="true" placeholder="Friday">
+							<label for="saturday"></label>
+							<input type="text" name="saturday" id="saturday" value="" data-clear-btn="true" placeholder="Saturday">
+							<label for="sunday"></label>
+							<input type="text" name="sunday" id="sunday" value="" data-clear-btn="true" placeholder="Sunday">
+						</li>
+				
+	</ul>
+	<ul data-role="listview" data-inset="true">
+						<li data-role="fieldcontain">
+							<label>Craving Levels</label>
+							<label for="monday2"></label>
+							<input type="text" name="monday2" id="monday2" value="" data-clear-btn="true" placeholder="Monday">
+							<label for="tuesday2"></label>
+							<input type="text" name="tuesday2" id="tuesday2" value="" data-clear-btn="true" placeholder="Tuesday">
+							<label for="wednesday2"></label>
+							<input type="text" name="wednesday2" id="wednesday2" value="" data-clear-btn="true" placeholder="Wednesday">
+							<label for="thursday2"></label>
+							<input type="text" name="thursday2" id="thursday2" value="" data-clear-btn="true" placeholder="Thursday">
+							<label for="friday2"></label>
+							<input type="text" name="friday2" id="friday2" value="" data-clear-btn="true" placeholder="Friday">
+							<label for="saturday2"></label>
+							<input type="text" name="saturday2" id="saturday2" value="" data-clear-btn="true" placeholder="Saturday">
+							<label for="sunday2"></label>
+							<input type="text" name="sunday2" id="sunday2" value="" data-clear-btn="true" placeholder="Sunday">
+						</li>
+				
+	</ul>
+	<ul data-role="listview" data-inset="true">
+						<li data-role="fieldcontain">
+							<label>Stress Levels</label>
+							<label for="monday3"></label>
+							<input type="text" name="monday3" id="monday3" value="" data-clear-btn="true" placeholder="Monday">
+							<label for="tuesday3"></label>
+							<input type="text" name="tuesday3" id="tuesday3" value="" data-clear-btn="true" placeholder="Tuesday">
+							<label for="wednesday3"></label>
+							<input type="text" name="wednesday3" id="wednesday3" value="" data-clear-btn="true" placeholder="Wednesday">
+							<label for="thursday3"></label>
+							<input type="text" name="thursday3" id="thursday3" value="" data-clear-btn="true" placeholder="Thursday">
+							<label for="friday3"></label>
+							<input type="text" name="friday3" id="friday3" value="" data-clear-btn="true" placeholder="Friday">
+							<label for="saturday3"></label>
+							<input type="text" name="saturday3" id="saturday3" value="" data-clear-btn="true" placeholder="Saturday">
+							<label for="sunday3"></label>
+							<input type="text" name="sunday3" id="sunday3" value="" data-clear-btn="true" placeholder="Sunday">
+						</li>
+				<li class="ui-body ui-body-b">
+						<fieldset class="ui-grid-a">
+							<div class="ui-block-b"><button type="reset" data-theme="a" id="button3">Reset</button></div>
+							<div class="ui-block-b"><button data-theme="a" >Submit</button></div>
+						</fieldset>
+				</li>
+	</ul>
+	</div>	
+	</form>
+	</div>
+	<div data-role="footer" data-id="foo1" data-position="fixed">
+		<h4>Page Footer</h4>
+	</div><!-- /footer -->
+</div>
+<!-- **********************************************************************************************************
+		                 Chatroom page
+     ********************************************************************************************************** -->
+<!-- ********************************************************************************************************** -->
+<div data-role="page" id="storageDemoPage">
+	<div data-role="header" data-position="fixed" class="ui-bar ui-bar-b">
+	<a href="#user" data-icon="back" data-mini ="true">Back</a>
+		<h1>Say No to Cigarettes</h1>
+	</div><!-- /header -->
+			<p id="message"></p>
+				<ul data-role="listview" data-inset="true">
+					<li data-role="list-divider">What's on your mind?</li>
+					<li>
+						<input type="text" id="entry" name="entry" placeholder="Enter here"/>
+						<input type="button" id="addToStorage" value="Add to conversation"/>
+					</li>
+					<li data-role="list-divider">Recent posts</li>
+					<li class="storeItem"></li>
+				</ul>
+	<div data-role="footer" data-id="foo1" data-position="fixed">
+		<h1> Copyright &copy; Light &amp; Co </h1>
+	</div><!-- /footer -->
+</div><!-- /page -->
+<!-- **********************************************************************************************************
+		                 Contact Us page
+     ********************************************************************************************************** -->
+<!-- ********************************************************************************************************** -->
+<div id = "contactus" data-role="page">
+<div id = "main-container">
+<div id="form-container" >
+	<div data-role="header" data-position="fixed" class="ui-bar ui-bar-b">
+	<a href="#user" data-icon="back" data-mini ="true">Back</a>
+		<h1>Contact Us</h1>
+	</div><!-- /header -->
+	<form>
+      <table>
+        <tr>
+          <td id="1"><label for="name">Name</label></td>
+          <td id="2"><input type="text" class="validate[required,custom[onlyLetter]]" name="name" id="name"  /></td>
+          <td  id="errOffset">&nbsp;</td>
+        </tr>
+        <tr>
+          <td><label for="email">Email</label></td>
+          <td><input type="text" class="validate[required,custom[email]]" name="email"  /></td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td><label for="subject">Subject</label></td>
+          <td><select name="subject" id="subject">
+            <option value="" selected="selected"> - Choose -</option>
+            <option value="Question">Question</option>
+            <option value="Business proposal">Business proposal</option>
+            <option value="Advertisement">Advertising</option>
+            <option value="Complaint">Complaint</option>
+          </select>          </td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td id="23" ><label>Message</label></td>
+          <td><textarea name="message"  cols="35" rows="5"></textarea></td>
+          <td id="233">&nbsp;</td>
+        </tr>
+         <tr>
+          <td id="234">&nbsp;</td>
+          <td colspan="2"><input type="button" name=" "  value="Submit" />
+          <input type="reset" name="button2" id="button2" value="Reset" />
+        </tr>
+      </table>
+      </form>
+	<div data-role="footer" data-id="foo1" data-position="fixed">
+		<h1> Copyright &copy; Light &amp; Co </h1>
+	</div><!-- /footer -->
+</div><!-- /page -->
+</div>
+</div>
+<!-- **********************************************************************************************************
+		                 Tutorials page
+     ********************************************************************************************************** -->
+<!-- ********************************************************************************************************** -->
+<div data-role="page" id ="tutorials">
+	<div data-role="header" data-position="fixed" class="ui-bar ui-bar-b">
+		<a href="#user" data-icon="back" data-mini ="true">Back</a>
+		<h1>Tutorials</h1>
+	</div><!-- /header -->
+   	<div data-frole="content" >
+		<br />
+		<form>
+			<div data-role="collapsible" data-theme="b" data-content-theme="d" data-inset="false">
+				<h3>Excercises</h3>
+				<ul data-role="listview">
+					<li><a href="#video4" data-transition="turn" data-inline="true" data-rel="popup">Quick Sweat Cardio Workout</a></li>
+					<li><a href="#video5" data-transition="turn" data-inline="true" data-rel="popup">Athletic Body Cardio Workout</a></li>
+					<li><a href="#video6" data-transition="turn" data-inline="true" data-rel="popup">10 Minute ab workout</a></li>
+				</ul>
+			</div><!-- /collapsible -->
+			<div data-role="collapsible" data-theme="b" data-content-theme="d" data-inset="false">
+				<h3>Resources</h3>
+				<ul data-role="listview">
+					<li><a href="#video1" data-transition="turn" data-inline="true" data-rel="popup">How to Quit Smoking</a></li>
+					<li><a href="#video2" data-transition="turn" data-inline="true" data-rel="popup">The Power of Your Subconscious</a></li>
+					<li><a href="#video3" data-transition="turn" data-inline="true" data-rel="popup">Proven Strategies that Help You Stop Smoking</a></li>
+				</ul>
+			</div><!-- /collapsible -->
+			<div data-role="collapsible" data-theme="b" data-content-theme="d" data-inset="false">
+				<h3>Gyms in your area</h3>
+				<ul data-role="listview">
+					<li><a href="http://svfitness.com/">SV Fitness</a></li>
+					<li><a href="http://wicklowmartialarts.com/blog/index.php/uplift-gym-new-gym-in-wicklow-town/">UpLift Gym Wicklow</a></li>
+					<li><a href="http://www.bendunnegyms.com/northwood.aspx">BenDunne Gym</a></li>
+				</ul>
+			</div><!-- /collapsible -->
+			<div data-role="collapsible" data-theme="b" data-content-theme="d" data-inset="false">
+				<h3>Supplements &#40; Aid &#41;</h3>
+				<ul data-role="listview">
+					<li><a href="#">Herbal</a></li>
+					<li><a href="#">Alligator</a></li>
+					<li><a href="#">Ant</a></li>
+					<li><a href="#">Bear</a></li>
+				</ul>
+			</div><!-- /collapsible -->
+		</form><br />
+					<div data-role="popup" id="video1" class="ui-content" data-theme="d">
+							<object style="height: 315px; width: 420px;" type="application/x-shockwave-flash">
+							<param name="movie" value="https://www.youtube-nocookie.com/v/ZhdBk0wiXiQ?version=3&amp;hl=en_US"/>
+							<param name="allowFullScreen" value="true"/>
+							<param name="allowScriptAccess" value="always"/>
+							<embed src="https://www.youtube-nocookie.com/v/ZhdBk0wiXiQ?version=3&amp;hl=en_US" type="application/x-shockwave-flash" allowfullscreen="true" allowScriptAccess="always" width="400" height="260"/>
+					</object>
+					</div>
+					<div data-role="popup" id="video2" class="ui-content" data-theme="d">
+							<object style="height: 315px; width: 420px;" type="application/x-shockwave-flash">
+							<param name="movie" value="http://www.youtube-nocookie.com/v/VFrp9ROB44c?version=3&amp;hl=en_US"/>
+							<param name="allowFullScreen" value="true"/>
+							<param name="allowScriptAccess" value="always"/>
+							<embed src="http://www.youtube-nocookie.com/v/VFrp9ROB44c?version=3&amp;hl=en_US" type="application/x-shockwave-flash" allowfullscreen="true" allowScriptAccess="always" width="400" height="260"/>
+					</object>
+					</div>
+					<div data-role="popup" id="video3" class="ui-content" data-theme="d">
+							<object style="height: 150px; width: 230px;" type="application/x-shockwave-flash">
+							<param name="movie" value="http://www.youtube-nocookie.com/v/4UeA_qZHnbU?version=3&amp;hl=en_US"/>
+							<param name="allowFullScreen" value="true"/>
+							<param name="allowScriptAccess" value="always"/>
+							<embed src="http://www.youtube-nocookie.com/v/4UeA_qZHnbU?version=3&amp;hl=en_US" type="application/x-shockwave-flash" allowfullscreen="true" allowScriptAccess="always" width="400" height="260"/>
+					</object>
+					</div>
+					<div data-role="popup" id="video4" class="ui-content" data-theme="d">
+							<object style="height: 150px; width: 230px" type="application/x-shockwave-flash">
+							<param name="movie" value="http://www.youtube-nocookie.com/v/X1TuhAn6C-g?hl=en_US&amp;version=3"/>
+							<param name="allowFullScreen" value="true"/>
+							<param name="allowScriptAccess" value="always"/>
+							<embed src="http://www.youtube-nocookie.com/v/X1TuhAn6C-g?hl=en_US&amp;version=3" type="application/x-shockwave-flash" allowfullscreen="true" allowScriptAccess="always" width="400" height="260"/>
+					</object>
+					</div>
+					<div data-role="popup" id="video5" class="ui-content" data-theme="d">
+							<object style="height: 150px; width: 230px" type="application/x-shockwave-flash">
+							<param name="movie" value="http://www.youtube-nocookie.com/v/KaGmhulFaLA?version=3&amp;hl=en_US"/>
+							<param name="allowFullScreen" value="true"/>
+							<param name="allowScriptAccess" value="always"/>
+							<embed src="http://www.youtube-nocookie.com/v/KaGmhulFaLA?version=3&amp;hl=en_US" type="application/x-shockwave-flash" allowfullscreen="true" allowScriptAccess="always" width="400" height="260"/>
+					</object>
+					</div>
+					<div data-role="popup" id="video6" class="ui-content" data-theme="d">
+							<object style="height: 150px; width: 230px" type="application/x-shockwave-flash">
+							<param name="movie" value="http://www.youtube-nocookie.com/v/acVU6HGmyVk?hl=en_US&amp;version=3"/>
+							<param name="allowFullScreen" value="true"/>
+							<param name="allowScriptAccess" value="always"/>
+							<embed src="http://www.youtube-nocookie.com/v/acVU6HGmyVk?hl=en_US&amp;version=3" type="application/x-shockwave-flash" allowfullscreen="true" allowScriptAccess="always" width="400" height="260"/>
+					</object>
+					</div>
+	</div><!-- /content -->
+	<div data-role="footer" data-id="foo1" data-position="fixed">
+		<h4>Page Footer</h4>
+	</div><!-- /footer -->
+</div><!-- /page -->
+</body>
+</html>
